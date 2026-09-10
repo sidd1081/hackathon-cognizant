@@ -12,7 +12,7 @@ root cause. If the retrieved evidence doesn't document one, it returns exactly
 - **Workflow status ≠ resolution:** Jira status (`Fixed`/`Resolved`/`Closed`) is
   never treated as a technical fix — only the documented `resolution_notes` are.
 
-## Architecture
+## Architecture.
 
 ```
 CSV → validate → clean → search_text (project+summary+description)
