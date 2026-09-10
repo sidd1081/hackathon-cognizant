@@ -6,6 +6,7 @@ import { DatasetPanel } from "./components/DatasetPanel.jsx";
 import { IncidentForm } from "./components/IncidentForm.jsx";
 import { RcaSummary } from "./components/RcaSummary.jsx";
 import { SimilarIncidents } from "./components/SimilarIncidents.jsx";
+import { ChatbotPanel } from "./components/ChatbotPanel.jsx";
 import { EvaluationPanel } from "./components/EvaluationPanel.jsx";
 import { AuthPage } from "./components/AuthPage.jsx";
 import { Tabs } from "./components/ui/Tabs.jsx";
@@ -106,6 +107,9 @@ export default function App() {
 
             {/* Response (full width) */}
             <RcaSummary analysis={analysis} />
+
+            {/* Assistant chat available after the RCA */}
+            <ChatbotPanel analysis={analysis} incidentText={incidentText} />
 
             {/* Retrievals (full width) */}
             <SimilarIncidents analysis={analysis} />
