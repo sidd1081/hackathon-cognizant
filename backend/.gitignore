@@ -1,0 +1,47 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# --- Virtual environments ---
+.venv/
+venv/
+env/
+
+# --- uv ---
+# Keep pyproject.toml tracked; the lockfile can be committed if desired.
+# uv.lock is kept by default (uncomment to ignore):
+# uv.lock
+
+# --- Environment / secrets ---
+.env
+.env.local
+*.env
+!.env.example
+
+# --- Tooling caches ---
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- Generated data artifacts (raw dataset stays tracked) ---
+data/processed/*
+data/vectorstore/*
+!data/processed/.gitkeep
+!data/vectorstore/.gitkeep
+
+# --- Auth database (contains user records / password hashes) ---
+data/*.db
+data/*.db-journal
+
+# --- IDE / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

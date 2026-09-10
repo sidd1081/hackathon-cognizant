@@ -1,0 +1,56 @@
+# Portable deployment: run the whole app on any Docker host (EC2, Lightsail,
+# or locally). The web container serves the frontend and proxies /api to the
+# backend; Postgres stores users durably.
+#
+#   1. cd backend && cp .env.example .env   # set GROQ_API_KEY (and JWT_SECRET in prod)
+#   2. docker compose up --build
+#   3. open http://localhost:8080
+#
+# The FAISS index persists in ./backend/data; user accounts persist in the
+# Postgres volume (pgdata).
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: rca
+      POSTGRES_PASSWORD: rca
+      POSTGRES_DB: rca
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rca"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  backend:
+    build: ./backend
+    env_file:
+      - ./backend/.env
+    environment:
+      # Overrides the SQLite fallback so users are stored in Postgres.
+      DATABASE_URL: postgresql://rca:rca@db:5432/rca
+    volumes:
+      - ./backend/data:/app/data
+    expose:
+      - "8000"
+    # Uncomment to reach the API directly (e.g. for debugging /docs):
+    # ports:
+    #   - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  web:
+    build: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+
+volumes:
+  pgdata:

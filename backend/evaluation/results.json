@@ -1,0 +1,360 @@
+{
+  "generated_at": "2026-08-21T11:51:24.048967+00:00",
+  "config": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "groq_model": "openai/gpt-oss-120b",
+    "fetch_k": 10,
+    "top_k": 5,
+    "num_cases": 9,
+    "correctness_threshold": 0.55
+  },
+  "retrieval": {
+    "num_scored_queries": 8,
+    "recall_at_5": 0.875,
+    "precision_at_5": 0.175,
+    "mrr": 0.875
+  },
+  "rca": {
+    "root_cause_correctness": 0.7778,
+    "mean_root_cause_alignment": 0.5976,
+    "resolution_relevance_mean": 0.5451,
+    "evidence_support_rate": 1.0,
+    "hallucination_rate": 0.0,
+    "abstention_correct_rate": 1.0
+  },
+  "performance_ms": {
+    "embedding": {
+      "mean": 41.29,
+      "median": 30.65,
+      "min": 19.65,
+      "max": 98.54,
+      "n": 9
+    },
+    "retrieval": {
+      "mean": 60.49,
+      "median": 41.81,
+      "min": 28.6,
+      "max": 141.44,
+      "n": 9
+    },
+    "total_rca": {
+      "mean": 12338.51,
+      "median": 11025.86,
+      "min": 31.5,
+      "max": 24977.38,
+      "n": 9
+    }
+  },
+  "cases": [
+    {
+      "id": "kafka-keyvalueiterator-leak",
+      "query": "A Kafka Streams application leaks resources because KeyValueIterator objects returned from state store queries are never closed after they are used.",
+      "relevant_ids": [
+        "KAFKA-13122"
+      ],
+      "reference_id": "KAFKA-13122",
+      "retrieved_top5": [
+        "KAFKA-13122",
+        "KAFKA-10616",
+        "KAFKA-10722",
+        "KAFKA-9073",
+        "KAFKA-10638"
+      ],
+      "recall_at_5": 1.0,
+      "precision_at_5": 0.2,
+      "reciprocal_rank": 1.0,
+      "expected": "documented",
+      "generated_root_cause_is_sentinel": false,
+      "root_cause_alignment": 0.6489,
+      "root_cause_correct": true,
+      "resolution_relevance": 0.6954,
+      "supporting_ticket_ids": [
+        "KAFKA-13122"
+      ],
+      "evidence_support": true,
+      "hallucination_flag": false,
+      "confidence": "high",
+      "status": "generated",
+      "latency_ms": {
+        "embedding": 20.31,
+        "retrieval": 28.6,
+        "total_rca": 1825.66
+      }
+    },
+    {
+      "id": "flink-entrypoint-shutdown-lock",
+      "query": "A Flink cluster entrypoint fails to shut down after an uncaught exception because a thread join call keeps holding the shutdown lock, so the process hangs instead of exiting.",
+      "relevant_ids": [
+        "FLINK-23406"
+      ],
+      "reference_id": "FLINK-23406",
+      "retrieved_top5": [
+        "FLINK-21274",
+        "FLINK-22820",
+        "FLINK-21028",
+        "FLINK-20284",
+        "FLINK-22496"
+      ],
+      "recall_at_5": 0.0,
+      "precision_at_5": 0.0,
+      "reciprocal_rank": 0.0,
+      "expected": "documented",
+      "generated_root_cause_is_sentinel": true,
+      "root_cause_alignment": 0.0,
+      "root_cause_correct": false,
+      "resolution_relevance": null,
+      "supporting_ticket_ids": [],
+      "evidence_support": true,
+      "hallucination_flag": false,
+      "confidence": "low",
+      "status": "generated",
+      "latency_ms": {
+        "embedding": 19.65,
+        "retrieval": 39.05,
+        "total_rca": 1534.4
+      }
+    },
+    {
+      "id": "spark-yarnclustersuite-noclassdef",
+      "query": "Running the Spark YarnClusterSuite integration tests throws NoClassDefFoundError unless the hadoop-3.2 build profile is explicitly activated.",
+      "relevant_ids": [
+        "SPARK-36067"
+      ],
+      "reference_id": "SPARK-36067",
+      "retrieved_top5": [
+        "SPARK-36067",
+        "HADOOP-14298",
+        "SPARK-33104",
+        "SPARK-34480",
+        "SPARK-33343"
+      ],
+      "recall_at_5": 1.0,
+      "precision_at_5": 0.2,
+      "reciprocal_rank": 1.0,
+      "expected": "documented",
+      "generated_root_cause_is_sentinel": false,
+      "root_cause_alignment": 0.8807,
+      "root_cause_correct": true,
+      "resolution_relevance": 0.3086,
+      "supporting_ticket_ids": [
+        "SPARK-36067"
+      ],
+      "evidence_support": true,
+      "hallucination_flag": false,
+      "confidence": "high",
+      "status": "generated",
+      "latency_ms": {
+        "embedding": 22.62,
+        "retrieval": 88.51,
+        "total_rca": 11025.86
+      }
+    },
+    {
+      "id": "hbase-bufferedmutator-executor-leak",
+      "query": "Repeatedly calling Connection.getBufferedMutator for a table leaks thread pool executors and never releases them.",
+      "relevant_ids": [
+        "HBASE-26088"
+      ],
+      "reference_id": "HBASE-26088",
+      "retrieved_top5": [
+        "HBASE-26088",
+        "CASSANDRA-15726",
+        "HBASE-22963",
+        "HBASE-21775",
+        "SPARK-35391"
+      ],
+      "recall_at_5": 1.0,
+      "precision_at_5": 0.2,
+      "reciprocal_rank": 1.0,
+      "expected": "documented",
+      "generated_root_cause_is_sentinel": false,
+      "root_cause_alignment": 0.5961,
+      "root_cause_correct": true,
+      "resolution_relevance": 0.531,
+      "supporting_ticket_ids": [
+        "HBASE-26088"
+      ],
+      "evidence_support": true,
+      "hallucination_flag": false,
+      "confidence": "medium",
+      "status": "generated",
+      "latency_ms": {
+        "embedding": 30.65,
+        "retrieval": 41.81,
+        "total_rca": 23421.26
+      }
+    },
+    {
+      "id": "cassandra-pending-ranges-shutdown-peer",
+      "query": "When a moving node crashes hard during a range movement, stale pending ranges remain for the shutdown peer and block a subsequent node replacement.",
+      "relevant_ids": [
+        "CASSANDRA-16796"
+      ],
+      "reference_id": "CASSANDRA-16796",
+      "retrieved_top5": [
+        "CASSANDRA-16796",
+        "KAFKA-9051",
+        "HBASE-22538",
+        "CASSANDRA-16638",
+        "HBASE-24117"
+      ],
+      "recall_at_5": 1.0,
+      "precision_at_5": 0.2,
+      "reciprocal_rank": 1.0,
+      "expected": "documented",
+      "generated_root_cause_is_sentinel": false,
+      "root_cause_alignment": 0.5037,
+      "root_cause_correct": false,
+      "resolution_relevance": null,
+      "supporting_ticket_ids": [
+        "CASSANDRA-16796"
+      ],
+      "evidence_support": true,
+      "hallucination_flag": false,
+      "confidence": "high",
+      "status": "generated",
+      "latency_ms": {
+        "embedding": 98.54,
+        "retrieval": 141.44,
+        "total_rca": 23174.92
+      }
+    },
+    {
+      "id": "solr-grouped-query-renamed-key-npe",
+      "query": "A distributed grouped query in Solr throws a NullPointerException when the unique key field has been renamed.",
+      "relevant_ids": [
+        "SOLR-15273"
+      ],
+      "reference_id": "SOLR-15273",
+      "retrieved_top5": [
+        "SOLR-15273",
+        "SOLR-12128",
+        "SOLR-13414",
+        "SOLR-11532",
+        "SOLR-11130"
+      ],
+      "recall_at_5": 1.0,
+      "precision_at_5": 0.2,
+      "reciprocal_rank": 1.0,
+      "expected": "documented",
+      "generated_root_cause_is_sentinel": false,
+      "root_cause_alignment": 0.6655,
+      "root_cause_correct": true,
+      "resolution_relevance": 0.5475,
+      "supporting_ticket_ids": [
+        "SOLR-15273"
+      ],
+      "evidence_support": true,
+      "hallucination_flag": false,
+      "confidence": "high",
+      "status": "generated",
+      "latency_ms": {
+        "embedding": 24.19,
+        "retrieval": 70.34,
+        "total_rca": 2988.72
+      }
+    },
+    {
+      "id": "zookeeper-listsubtreebfs-root",
+      "query": "Calling ZkUtil listSubTreeBFS on the root path throws an IllegalArgumentException because an invalid path with an empty node name is generated.",
+      "relevant_ids": [
+        "ZOOKEEPER-4325"
+      ],
+      "reference_id": "ZOOKEEPER-4325",
+      "retrieved_top5": [
+        "ZOOKEEPER-4325",
+        "ZOOKEEPER-1929",
+        "SOLR-12072",
+        "SOLR-14961",
+        "HBASE-21629"
+      ],
+      "recall_at_5": 1.0,
+      "precision_at_5": 0.2,
+      "reciprocal_rank": 1.0,
+      "expected": "documented",
+      "generated_root_cause_is_sentinel": false,
+      "root_cause_alignment": 0.5914,
+      "root_cause_correct": true,
+      "resolution_relevance": 0.6428,
+      "supporting_ticket_ids": [
+        "ZOOKEEPER-4325",
+        "SOLR-12072"
+      ],
+      "evidence_support": true,
+      "hallucination_flag": false,
+      "confidence": "high",
+      "status": "generated",
+      "latency_ms": {
+        "embedding": 55.37,
+        "retrieval": 35.76,
+        "total_rca": 24977.38
+      }
+    },
+    {
+      "id": "hadoop-auth-jetty-server-dependency",
+      "query": "The hadoop-auth module should drop its jetty-server dependency because Jetty prevents loading jetty-server classes inside web applications.",
+      "relevant_ids": [
+        "HADOOP-17621"
+      ],
+      "reference_id": "HADOOP-17621",
+      "retrieved_top5": [
+        "HADOOP-17621",
+        "HADOOP-16727",
+        "HADOOP-16590",
+        "HADOOP-14024",
+        "HADOOP-13132"
+      ],
+      "recall_at_5": 1.0,
+      "precision_at_5": 0.2,
+      "reciprocal_rank": 1.0,
+      "expected": "documented",
+      "generated_root_cause_is_sentinel": false,
+      "root_cause_alignment": 0.8941,
+      "root_cause_correct": true,
+      "resolution_relevance": null,
+      "supporting_ticket_ids": [
+        "HADOOP-17621"
+      ],
+      "evidence_support": true,
+      "hallucination_flag": false,
+      "confidence": "medium",
+      "status": "generated",
+      "latency_ms": {
+        "embedding": 30.65,
+        "retrieval": 41.67,
+        "total_rca": 22066.87
+      }
+    },
+    {
+      "id": "out-of-domain-coffee",
+      "query": "The office coffee machine is leaking water onto the break-room floor.",
+      "relevant_ids": [],
+      "reference_id": null,
+      "retrieved_top5": [
+        "KAFKA-13122",
+        "KAFKA-12726",
+        "KAFKA-9830",
+        "KAFKA-9674",
+        "KAFKA-9173"
+      ],
+      "recall_at_5": null,
+      "precision_at_5": null,
+      "reciprocal_rank": null,
+      "expected": "abstain",
+      "generated_root_cause_is_sentinel": true,
+      "root_cause_alignment": null,
+      "root_cause_correct": true,
+      "resolution_relevance": null,
+      "supporting_ticket_ids": [],
+      "evidence_support": true,
+      "hallucination_flag": false,
+      "confidence": "low",
+      "status": "insufficient_evidence",
+      "latency_ms": {
+        "embedding": 69.61,
+        "retrieval": 57.21,
+        "total_rca": 31.5
+      }
+    }
+  ]
+}
