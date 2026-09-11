@@ -1,3 +1,4 @@
+// health indicator card
 const MAP = {
   checking: ["bg-amber-400 animate-pulse", "text-[#8b949e]", "Checking…"],
   online:   ["bg-emerald-400", "text-emerald-400", "Online"],
