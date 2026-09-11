@@ -5,7 +5,7 @@ generates an **evidence-grounded** root cause analysis — and never fabricates 
 root cause. If the retrieved evidence doesn't document one, it returns exactly
 `Not explicitly documented.`
 
-- **Evidence-only:** every conclusion cites real historical ticket IDs.
+- **Evidence-only:** every conclusion cites real historical ticket ID's.
 - **No semantic leakage:** only the problem statement (project + summary +
   description) is embedded; root causes and resolutions are returned as
   retrieved evidence, never mixed into the search text.
