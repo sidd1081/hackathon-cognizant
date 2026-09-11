@@ -2,29 +2,63 @@ import { useState } from "react";
 import { Button } from "./ui/Button.jsx";
 import { Alert } from "./ui/Alert.jsx";
 
-const FIELD =
+const FIELD_CLASS =
   "mt-1 w-full rounded-lg border border-[#30363d] bg-[#0d1117] px-3 py-2 text-sm text-[#e6edf3] placeholder:text-[#6e7681] focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500/40";
+
+function FormInput({ id, label, type, value, onChange, placeholder, autoComplete, minLength, required = true }) {
+  return (
+    <div>
+      <label htmlFor={id} className="block text-xs font-medium text-[#8b949e]">
+        {label}
+      </label>
+      <input
+        id={id}
+        name={id}
+        type={type}
+        value={value}
+        onChange={onChange}
+        autoComplete={autoComplete}
+        placeholder={placeholder}
+        minLength={minLength}
+        className={FIELD_CLASS}
+        required={required}
+      />
+    </div>
+  );
+}
 
 export function AuthPage({ onLogin, onSignup }) {
   const [mode, setMode] = useState("login");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({ name: "", email: "", password: "" });
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
 
   const isSignup = mode === "signup";
-  const switchMode = () => { setMode(isSignup ? "login" : "signup"); setError(""); };
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const switchMode = () => {
+    setMode((prev) => (prev === "signup" ? "login" : "signup"));
+    setError("");
+    setFormData({ name: "", email: "", password: "" });
+  };
 
   const submit = async (e) => {
     e.preventDefault();
     setError("");
     setBusy(true);
+
     try {
-      if (isSignup) await onSignup(name, email, password);
-      else await onLogin(email, password);
+      if (isSignup) {
+        await onSignup(formData.name, formData.email, formData.password);
+      } else {
+        await onLogin(formData.email, formData.password);
+      }
     } catch (err) {
-      setError(err.message || "Something went wrong. Please try again.");
+      setError(err?.message || "Something went wrong. Please try again.");
     } finally {
       setBusy(false);
     }
@@ -45,24 +79,37 @@ export function AuthPage({ onLogin, onSignup }) {
 
         <form onSubmit={submit} className="space-y-4 rounded-xl border border-[#30363d] bg-[#161b22] p-6">
           {isSignup && (
-            <div>
-              <label htmlFor="name" className="block text-xs font-medium text-[#8b949e]">Name</label>
-              <input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)}
-                autoComplete="name" placeholder="Jane Doe" className={FIELD} required />
-            </div>
+            <FormInput
+              id="name"
+              label="Name"
+              type="text"
+              value={formData.name}
+              onChange={handleChange}
+              autoComplete="name"
+              placeholder="Jane Doe"
+            />
           )}
-          <div>
-            <label htmlFor="email" className="block text-xs font-medium text-[#8b949e]">Email</label>
-            <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)}
-              autoComplete={isSignup ? "email" : "username"} placeholder="you@example.com" className={FIELD} required />
-          </div>
-          <div>
-            <label htmlFor="password" className="block text-xs font-medium text-[#8b949e]">Password</label>
-            <input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}
-              autoComplete={isSignup ? "new-password" : "current-password"}
-              placeholder={isSignup ? "Min 8 characters" : "••••••••"}
-              minLength={isSignup ? 8 : undefined} className={FIELD} required />
-          </div>
+
+          <FormInput
+            id="email"
+            label="Email"
+            type="email"
+            value={formData.email}
+            onChange={handleChange}
+            autoComplete={isSignup ? "email" : "username"}
+            placeholder="you@example.com"
+          />
+
+          <FormInput
+            id="password"
+            label="Password"
+            type="password"
+            value={formData.password}
+            onChange={handleChange}
+            autoComplete={isSignup ? "new-password" : "current-password"}
+            placeholder={isSignup ? "Min 8 characters" : "••••••••"}
+            minLength={isSignup ? 8 : undefined}
+          />
 
           {error && <Alert variant="error">{error}</Alert>}
 
