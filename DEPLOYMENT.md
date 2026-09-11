@@ -99,6 +99,8 @@ This compose setup runs unchanged on a single VM:
 > Users are stored in the compose **Postgres** service. For a managed database
 > instead (RDS/Cloud SQL/Supabase/Neon), drop the `db` service and point
 > `DATABASE_URL` at the managed instance — no code changes.
+3. **Deployment verification:** After starting the Compose stack, verify that the containers are running with `docker compose ps` and check the backend logs with `docker compose logs -f backend`. Confirm that the application is reachable on port `8080` before configuring HTTPS or a custom domain.
+
 
 ## Image notes
 
@@ -256,3 +258,6 @@ The **root `Dockerfile`** is backend-only and serves the API on port **7860**
 
 If API calls fail with a CORS error in the browser console, `CORS_ORIGINS` on the
 Space doesn't match the Vercel origin exactly (scheme + host, no trailing slash).
+
+
+
